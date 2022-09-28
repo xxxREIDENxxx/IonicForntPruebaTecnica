@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Login
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+<div id="container" *ngIf="!crearUsuario">
+ 
+  <ion-item>
+    <ion-label>Usuario</ion-label>
+    <ion-input [(ngModel)]="usuario.username" [ngModelOptions]="{standalone: true}" placeholder="username" class="form-control" required ClearInput></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Password</ion-label>
+    <ion-input type="password" [(ngModel)]="usuario.password" [ngModelOptions]="{standalone: true}" placeholder="password" class="form-control" required ClearInput></ion-input>
+  </ion-item>
+  <ion-button color="primary" (click)="login()" expand="block">Ingresar</ion-button>
+  <ion-button color="danger" (click)="crearCuenta()" expand="block">No tienes cuenta</ion-button>
+  <label style="color: red" *ngIf="errorInicio">Usuario o password incorresctos.</label>
+</div>
+
+<div id="container" *ngIf="crearUsuario">
+  <ion-item>
+    <ion-label>Usuario</ion-label>
+    <ion-input [(ngModel)]="usuario.name" [ngModelOptions]="{standalone: true}" placeholder="username" class="form-control" required ClearInput></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Nombre</ion-label>
+    <ion-input [(ngModel)]="usuario.username" [ngModelOptions]="{standalone: true}" placeholder="name" class="form-control" required ClearInput></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="usuario.password" [ngModelOptions]="{standalone: true}" placeholder="password" class="form-control" required ClearInput></ion-input>
+  </ion-item>
+  <ion-button color="primary" (click)="crear()" expand="block">Ingresar</ion-button>
+  
+</div>
+  
+</ion-content>

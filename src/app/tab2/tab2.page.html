@@ -1,0 +1,148 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      ADMINISTRADOR
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Administrador</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <label> Bienvenido Admin: </label>
+  <br>
+    <h3>Filtrar por Fecha:</h3>
+    <div class="filtrar">
+        Fecha Inicial:
+        <input type="date" [(ngModel)] = "fechaInicial">
+        Fecha Final:
+        <input type="date" [(ngModel)] = "fechaFinal">
+        <div class="col-md-2">
+            
+            <ion-button color="success" (click)="filtrar()" expand="block">Filtrar</ion-button>
+        </div>
+        <h3>Filtrar por Estado:</h3>
+        <input type="checkbox" [(ngModel)]="estadoFiltro" (click)="filtrarEstado()">
+    </div>
+    <h4>Tabla Pedidos</h4>
+    <ion-list>
+      <ion-item *ngFor="let pedido of pedidos">
+        <ion-avatar>
+          <ion-icon name="reader-outline"></ion-icon>
+        </ion-avatar>
+        <ion-label>
+          <h2> {{pedido.user.username}}</h2>
+        </ion-label>
+        <ion-label>
+          <h2> {{pedido.fecha}}</h2>
+        </ion-label>
+        <ion-label *ngIf="pedido.estado == true">
+          <h2> Pedido Entregado</h2>
+        </ion-label>
+        <ion-label *ngIf="pedido.estado == false">
+          <h2>Pedido no Entregado</h2>
+        </ion-label>
+        <ion-label>
+          <h2> {{pedido.lugar}}</h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+    <br>
+    <br>
+    <h4>Tabla Distribuidores</h4>
+    <ion-list>
+      
+        <ion-item *ngFor="let usuario of user">
+          <ion-avatar>
+            <ion-icon name="happy-outline">
+            </ion-icon>
+          </ion-avatar>
+          <ion-label>
+            <h2>  {{usuario.id}}</h2>
+          </ion-label>
+          <ion-label>
+            <h2>  {{usuario.username}}</h2>
+          </ion-label>
+          <ion-label>
+            <h2>  {{usuario.username}}</h2>
+          </ion-label>
+          <ion-label *ngIf="usuario.rol == true">
+            <h2>  Distribuidor</h2>
+          </ion-label>
+          <ion-label *ngIf="usuario.rol == false">
+            <h2>  Administrador</h2>
+          </ion-label>
+        </ion-item>
+    </ion-list>
+
+
+    <div class="row">
+      <div class="col-md-12">
+          <h2>Pedido Nuevo: <ion-button color="success" (click)="agregar()" expand="block">Agregar Pedido.</ion-button></h2>
+      </div>
+  </div>
+
+<form (ngSubmit)="crearPedido(formTemplate)" #formTemplate id="crear" *ngIf="crear" >
+  <br>
+  <div class="row" >
+      <div class="col-md-12">Seleccione al Distribuidor:
+          <div class="input-group mb-3" >
+              <div class="input-group-append">
+                  <label class="input-group-text" for="inputGroupSelect02">Usuario</label>
+                </div>
+              <select class="custom-select" id="inputGroupSelect02" [(ngModel)]="pedido.user.id"  [ngModelOptions]="{standalone: true}">
+                  <option value="0">Selecciona una opción</option>
+                  <option selected *ngFor="let usuario of user"  class="form-control" >{{usuario.id}}</option>
+              </select>
+              <br>
+             
+            </div>    
+      </div>
+  </div>
+  <br>
+  <div class="row">
+      <div class="col-md-12">
+          <input type="date" [(ngModel)]="pedido.fecha" [ngModelOptions]="{standalone: true}" placeholder="fecha" class="form-control"  required>
+      </div>
+  </div>
+  <br>
+  <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Estado</label>
+      </div>
+      <select class="custom-select" id="inputGroupSelect01"  [(ngModel)]="pedido.estado"  [ngModelOptions]="{standalone: true}">
+        <option value="false">No entregado</option>
+        <option value="true">entregado</option>
+        
+      </select>
+  </div>
+  <br>
+  <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Ciudad</label>
+      </div>
+      <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="pedido.lugar"[ngModelOptions]="{standalone: true}">
+        <option selected>Seleccione</option>
+        <option >Mosquera</option>
+        <option >Funza</option>
+        <option >Madrid</option>
+        <option >Facatativa</option>
+        <option >Bogota</option>
+      </select>
+  </div>
+  <br>
+  <div class="row">
+      <div class="col-md-12">  
+          <ion-button color="primary" type="submit" class="btn btn-primary float-rigth" value="Crear" expand="block">Crear.</ion-button>
+      </div>
+  </div>
+  <br>
+  <br>
+</form>
+
+  <ion-button color="primary" (click)="logout()" expand="block">Cerrar Sesion.</ion-button>
+</ion-content>

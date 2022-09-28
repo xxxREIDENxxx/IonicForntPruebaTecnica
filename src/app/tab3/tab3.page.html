@@ -1,0 +1,48 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Distribuidor
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Distribuidor</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <label ><h2>Bienvenid@: {{usuario.name}}</h2></label>
+
+
+
+  <h4>Tabla Pedidos</h4>
+  <ion-list>
+      
+    <ion-item *ngFor="let pedido of pedidos">
+      <ion-avatar>
+        <ion-icon name="happy-outline">
+        </ion-icon>
+      </ion-avatar>
+      <ion-label>
+        <h2>  {{pedido.fecha}}</h2>
+      </ion-label>
+      <ion-label>
+        <h2>  {{pedido.lugar}}</h2>
+      </ion-label>
+      
+      <ion-label *ngIf="pedido.estado == true">
+        <h2>  Entregado</h2>
+      </ion-label>
+      <ion-label *ngIf="pedido.estado == false">
+        <h2>  No entregado</h2>
+      </ion-label>
+      <ion-label>
+        <ion-button color="primary" class="btn btn-success" (click)="agregar(pedido)" expand="block">Confirmar Entrega.</ion-button>
+      </ion-label>
+    </ion-item>
+</ion-list>
+
+
+  <ion-button color="primary" (click)="logout()" expand="block">Cerrar Sesion.</ion-button>
+</ion-content>
