@@ -18,8 +18,10 @@
     <h3>Filtrar por Fecha:</h3>
     <div class="filtrar">
         Fecha Inicial:
+      
         <input type="date" [(ngModel)] = "fechaInicial">
         Fecha Final:
+        
         <input type="date" [(ngModel)] = "fechaFinal">
         <div class="col-md-2">
             
@@ -27,13 +29,22 @@
         </div>
         <h3>Filtrar por Estado:</h3>
         <input type="checkbox" [(ngModel)]="estadoFiltro" (click)="filtrarEstado()">
+        <h3>Recargar Tabla:</h3>
+        <ion-button color="success" (click)="cargar()" expand="block">Recarcar</ion-button>
     </div>
-    <h4>Tabla Pedidos</h4>
-    <ion-list>
+    <h4 align="center">Tabla Pedidos:</h4>
+    <ion-list >
+      <ion-item >
+        <ion-label>Id</ion-label>
+        <ion-label>Nombre</ion-label>
+        <ion-label>Fecha</ion-label>
+        <ion-label>Estado</ion-label>
+        <ion-label>Lugar</ion-label>
+      </ion-item>
       <ion-item *ngFor="let pedido of pedidos">
-        <ion-avatar>
-          <ion-icon name="reader-outline"></ion-icon>
-        </ion-avatar>
+        <ion-label>
+          <h2 align="left"> {{pedido.id}}</h2>
+        </ion-label>
         <ion-label>
           <h2> {{pedido.user.username}}</h2>
         </ion-label>
@@ -53,9 +64,13 @@
     </ion-list>
     <br>
     <br>
-    <h4>Tabla Distribuidores</h4>
+    <h4 align="center">Tabla Distribuidores</h4>
     <ion-list>
-      
+      <ion-item>
+        <ion-label>Id</ion-label>
+        <ion-label>Nombre</ion-label>
+        <ion-label>Rol</ion-label>
+      </ion-item>
         <ion-item *ngFor="let usuario of user">
           <ion-avatar>
             <ion-icon name="happy-outline">
@@ -64,9 +79,7 @@
           <ion-label>
             <h2>  {{usuario.id}}</h2>
           </ion-label>
-          <ion-label>
-            <h2>  {{usuario.username}}</h2>
-          </ion-label>
+          
           <ion-label>
             <h2>  {{usuario.username}}</h2>
           </ion-label>
