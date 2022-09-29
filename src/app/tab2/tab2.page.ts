@@ -23,6 +23,7 @@ export class Tab2Page {
   fechaInicial : Date = new Date('01/01/1900');
   fechaFinal   : Date = new Date('01/01/1900');
   estadoFiltro: boolean = false;
+  recargarTabla: boolean = false;
 
   constructor(private http:HttpClient) {
     
@@ -151,5 +152,10 @@ export class Tab2Page {
     return this.http.get<Pedido[]>("http://localhost:8080/api/pedido/estado/" + estado).pipe(
       catchError(e => "error"));
 
+  }
+
+  cargar(){
+    //this.recargarTabla = !this.recargarTabla;
+    this.buscarPedidos();
   }
 }
